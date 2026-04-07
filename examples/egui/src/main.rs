@@ -1,4 +1,4 @@
-use eframe::{NativeOptions, egui};
+use eframe::{egui, NativeOptions};
 use transform_gizmo_egui::math::{DQuat, Transform};
 use transform_gizmo_egui::{
     math::{DMat4, DVec3},
@@ -149,12 +149,12 @@ impl ExampleApp {
 }
 
 impl eframe::App for ExampleApp {
-    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
-        egui::Panel::left("options_panel").show_inside(ui, |ui| {
+    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        egui::SidePanel::left("options_panel").show(ctx, |ui| {
             self.draw_options(ui);
         });
 
-        egui::CentralPanel::default().show_inside(ui, |ui| {
+        egui::CentralPanel::default().show(ctx, |ui| {
             self.draw_gizmo(ui);
         });
     }
